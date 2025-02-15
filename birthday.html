@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Prajapati!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: beige;
+            overflow: hidden;
+        }
+        .banner {
+            font-size: 3em;
+            color: #ffcc00;
+            text-shadow: 4px 4px 8px #000;
+            margin-top: 20px;
+        }
+        .cake {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin: 50px auto;
+        }
+        .cake-layer {
+            position: absolute;
+            width: 100%;
+            background: pink;
+            border: 5px solid red;
+        }
+        .layer1 { height: 100px; bottom: 0; border-radius: 10px; }
+        .layer2 { height: 80px; bottom: 100px; width: 80%; left: 10%; border-radius: 10px; }
+        .layer3 { height: 60px; bottom: 180px; width: 60%; left: 20%; border-radius: 10px; }
+        .candle {
+            position: absolute;
+            width: 20px;
+            height: 80px;
+            background: red;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            border-radius: 5px;
+        }
+        .flame {
+            width: 25px;
+            height: 40px;
+            background: linear-gradient(orange, yellow, white);
+            border-radius: 50%;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: hsl(calc(360 * var(--hue)), 100%, 70%);
+            border-radius: 50%;
+            animation: fall 3s linear forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: hsl(calc(360 * var(--hue)), 100%, 70%);
+            border-radius: 50%;
+            bottom: -80px;
+            animation: rise 10s linear forwards;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .sparkles {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            border-radius: 50%;
+            animation: sparkle 1s linear infinite;
+        }
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .blow-button {
+            padding: 10px 20px;
+            font-size: 1.5em;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function blowCandles() {
+            document.querySelectorAll('.flame').forEach(flame => flame.style.display = 'none');
+        }
+        function createSparkles() {
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkles');
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 2000);
+            }
+        }
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = Math.random() * 100 + 'vh';
+                confetti.style.setProperty('--hue', Math.random());
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        function createBalloons() {
+            for (let i = 0; i < 30; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.setProperty('--hue', Math.random());
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 10000);
+            }
+        }
+        setInterval(createSparkles, 1000);
+        let confettiInterval = setInterval(createConfetti, 1000);
+        setTimeout(() => clearInterval(confettiInterval), 20000);
+        setTimeout(createBalloons, 1000);
+    </script>
+</head>
+<body onload="createSparkles(); createConfetti(); createBalloons();">
+    <h1 class="banner">Happy Birthday Prajapati!</h1>
+    <h2>"I might forget the cake, but remember I still love you!" 😂</h2>
+    <div class="cake">
+        <div class="cake-layer layer1"></div>
+        <div class="cake-layer layer2"></div>
+        <div class="cake-layer layer3"></div>
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+    </div>
+    <button class="blow-button" onclick="blowCandles()">Blow the Candle</button>
+</body>
+</html>
